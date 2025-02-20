@@ -25,8 +25,7 @@ async function connectToDatabase() {
     }
 }
 
-// Connect to DB before handling requests
-connectToDatabase();
+
 
 // Serve Static Frontend Files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Route: Fetch Student Document and Send to Frontend
 app.get('/student', async (req, res) => {
     try {
+        // Connect to DB before handling requests
+        connectToDatabase();
         const db = client.db(dbName);
         const collection = db.collection("students");
 
@@ -46,6 +47,8 @@ app.get('/student', async (req, res) => {
     } catch (error) {
         console.error("Error fetching student:", error);
         res.status(500).json({ message: "Server error" });
+    } finally {
+        await client.close();
     }
 });
 
