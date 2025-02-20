@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2 id="name">Loading...</h2>
+        <p>ID: <span id="id">-</span></p>
+        <p>Program: <span id="program">-</span></p>
+    </div>
+
+    <script>
+        async function fetchStudent() {
+            try {
+                const response = await fetch('/student'); // Fetch data from Express API
+                const student = await response.json();
+
+                document.getElementById('name').textContent = student.name;
+                document.getElementById('id').textContent = student.id;
+                document.getElementById('program').textContent = student.Program;
+            } catch (error) {
+                document.getElementById('name').textContent = "Error loading student";
+                console.error('Error fetching student:', error);
+            }
+        }
+
+        fetchStudent();
+    </script>
+
+</body>
+</html>
