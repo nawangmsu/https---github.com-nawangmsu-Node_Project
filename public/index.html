@@ -37,8 +37,8 @@
                 const response = await fetch('/student'); // Fetch data from Express API
                 const student = await response.json();
 
-                document.getElementById('name').textContent = student.name;
-                document.getElementById('id').textContent = student.id;
+                document.getElementById('name').textContent = student.Name;
+                document.getElementById('id').textContent = student._id;
                 document.getElementById('program').textContent = student.Program;
             } catch (error) {
                 document.getElementById('name').textContent = "Error loading student";

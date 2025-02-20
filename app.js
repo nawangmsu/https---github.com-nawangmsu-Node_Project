@@ -40,8 +40,8 @@ app.get('/student', async (req, res) => {
         const collection = db.collection("students");
 
         const query = { Program: "BCA" }; // Example query
-        const student = await collection.findOne(query, { projection: { _id: 0, id: 1, name: 1, Program: 1 } });
-
+        const student = await collection.findOne(query);
+        console.log(student);
         if (!student) return res.status(404).json({ message: "No student found" });
 
         res.json(student); // Send data as JSON
@@ -50,6 +50,7 @@ app.get('/student', async (req, res) => {
         res.status(500).json({ message: "Server error" });
     } finally {
         await client.close();
+
     }
 });
 
