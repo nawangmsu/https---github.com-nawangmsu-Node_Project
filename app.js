@@ -1,7 +1,7 @@
-//require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const { MongoClient } = require('mongodb');
-//const path = require('path');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,6 +35,7 @@ app.get('/student', async (req, res) => {
     try {
         // Connect to DB before handling requests
         connectToDatabase();
+
         const db = client.db(dbName);
         const collection = db.collection("students");
 
